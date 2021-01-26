@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+  </head>
+  <body>
+    
+    <h1>Hello User</h1>
+
+    <label for="username">Username:</label>
+    <input type="text" id="username">
+
+    <button id="btn">Run It!</button>
+
+    <script>
+      document.getElementById("btn").addEventListener("click", doStuff);
+
+      function doStuff() {
+        // Get information from text box
+        var uname = document.getElementById("username").value;
+
+        // Run GAS function
+        google.script.run.userClicked(uname);
+
+        // Clear the text box
+        document.getElementById("username").value = "";
+      }
+    </script>
+  </body>
+</html>

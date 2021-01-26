@@ -1,0 +1,65 @@
+<script>
+    // Initialize the Select
+    document.addEventListener('DOMContentLoaded', function() {
+      var selectBoxes = document.querySelectorAll('select');
+      var instances = M.FormSelect.init(selectBoxes);
+      google.script.run.withSuccessHandler(generateSelect).getData();
+    });
+
+    document.getElementById("btn").addEventListener("click", doStuff);
+    document.getElementById("zip").addEventListener("input", getEstimate);
+
+    function doStuff() {
+      var userInfo = {};
+      // Get information from text box
+      userInfo.firstName = document.getElementById("first_name").value;
+      userInfo.lastName = document.getElementById("last_name").value;
+      userInfo.app = document.getElementById("app").value;
+      userInfo.zip = document.getElementById("zip").value;
+      userInfo.estimate = document.getElementById("estimate").value;
+
+      // Run GAS function
+      google.script.run.userClicked(userInfo);
+
+      // Clear the text box
+      document.getElementById("first_name").value = "";
+      document.getElementById("last_name").value = "";
+      
+      var myApp = document.getElementById("app");
+      myApp.selectedIndex = 0;
+      M.FormSelect.init(myApp);
+
+      document.getElementById("zip").value = "";
+      document.getElementById("estimate").value = "";
+      M.updateTextFields();
+    }
+
+    function getEstimate() {
+      var zipCode = document.getElementById("zip").value;
+
+      if(zipCode.length === 5) {
+        google.script.run.withSuccessHandler(updateEstimate).getCost(zipCode);
+      }
+    }
+
+    function updateEstimate(cost) {
+      document.getElementById("estimate").value = cost;
+      M.updateTextFields();
+    }
+
+    function generateSelect() {
+
+      //Create array of options to be added
+      var dataArray = ["Volvo","Saab","Mercades","Audi"];
+
+      var selectList = document.getElementById("app");
+       
+      //Create and append the options
+      dataArray.forEach(function(r) {       
+          var option = document.createElement("option");
+          option.value = array[i];
+          option.text = array[i];
+          selectList.appendChild(option);         
+      });
+    }
+</script>

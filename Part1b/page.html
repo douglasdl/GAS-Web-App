@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+  </head>
+  <body>
+    
+    <h1>Hello User</h1>
+    <button id="btn">Run It!</button>
+
+    <script>
+      document.getElementById("btn").addEventListener("click", doStuff);
+
+      function doStuff() {
+        // Run GAS function
+        google.script.run.userClicked();
+      }
+    </script>
+  </body>
+</html>
